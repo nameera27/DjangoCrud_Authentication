@@ -3,6 +3,7 @@ from teacher.models import Teacher
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 # Create your views here.
 def home(request):
@@ -65,8 +66,8 @@ def loginuser(request):
         if user is not None:
             login(request,user)
             return redirect('index')
-        
-        return redirect('index')
+        else:
+            messages.warning(request, "Only Senior Teacher can access to the backends")
 
     return render(request,'login.html')
 
